@@ -1,8 +1,8 @@
 # Librarify
-### Proyek Magang ITC Android Development
-Aplikasi **Librarify** ini berguna untuk mengelola data anggota perpustakaan.
-Pengembang: Muhammad Handi Rachmawan.
-Universitas: UPN Veteran Yogyakarta.
+## Proyek Magang ITC Android Development
+* Aplikasi **Librarify** ini berguna untuk mengelola data anggota perpustakaan.
+* Pengembang: Muhammad Handi Rachmawan.
+* Universitas: UPN Veteran Yogyakarta.
 
 ### FITUR
 * Membuat data anggota perpustakaan Baru
