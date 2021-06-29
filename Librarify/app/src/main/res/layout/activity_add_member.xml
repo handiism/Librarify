@@ -67,14 +67,14 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date Of Birth:"/>
+        android:text="Place And Date Of Birth:"/>
     <EditText
         android:id="@+id/et_dob"
         android:layout_width="230dp"
         android:textSize="18sp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="Enter Date Of Birth"/>
+        android:hint="Enter Place AndDate Of Birth"/>
     <TextView
         android:textStyle="bold"
         android:id="@+id/tv_address"

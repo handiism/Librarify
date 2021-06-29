@@ -39,7 +39,7 @@ public class ViewMember extends AppCompatActivity {
         Intent getIntent = getIntent();
 
         getIntent.getIntExtra("id", 0);
-        Member member = database.userDao().get(getIntent.getIntExtra("id", 0));
+        Member member = database.memberDao().get(getIntent.getIntExtra("id", 0));
 
         tvIdInfo.setText(String.valueOf(member.id));
         tvNameInfo.setText(member.name);

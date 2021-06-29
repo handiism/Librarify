@@ -40,7 +40,7 @@ public class EditMember extends AppCompatActivity {
         database = AppDatabase.getInstance(getApplicationContext());
         Intent getIntent = getIntent();
         getIntent.getIntExtra("id",0);
-        member = database.userDao().get(getIntent.getIntExtra("id", 0));
+        member = database.memberDao().get(getIntent.getIntExtra("id", 0));
 
         tvIdInfo.setText(String.valueOf(member.id));
         etName.setText(member.name);
@@ -55,7 +55,7 @@ public class EditMember extends AppCompatActivity {
                         && !etDob.getText().toString().isEmpty()
                         && !etAddress.getText().toString().isEmpty()
                 ) {
-                    database.userDao().update(member.id
+                    database.memberDao().update(member.id
                             , etName.getText().toString()
                             , etDob.getText().toString()
                             , etAddress.getText().toString());

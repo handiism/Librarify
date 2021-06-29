@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.handira.librarify.R;
 import com.handira.librarify.adapter.MemberAdapter;
@@ -23,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends AppCompatActivity {
-    private Button btnAdd;
-    private RecyclerView recyclerView;
+    private Button btnAdd, btnRefresh;
     private AppDatabase database;
+    private RecyclerView recyclerView;
     private MemberAdapter memberAdapter;
     private List<Member> list = new ArrayList<>();
     private AlertDialog.Builder dialog;
@@ -34,48 +35,32 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Membuat layar penuh
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // Inisialisasi layout dan view
         setContentView(R.layout.activity_main);
-
         recyclerView = findViewById(R.id.recycler_view);
         btnAdd = findViewById(R.id.btn_add);
+        btnRefresh = findViewById(R.id.btn_refresh);
 
+        // Memndapatkan database
         database = AppDatabase.getInstance(getApplicationContext());
-        list.clear();
-        list.addAll(database.userDao().getAll());
-        memberAdapter = new MemberAdapter(getApplicationContext(), list);
-        memberAdapter.setDialog(new MemberAdapter.Dialog() {
-            @Override
-            public void onLongClick(int position) {
-                final CharSequence[] dialogItem = {"Delete"};
-                dialog = new AlertDialog.Builder(Main.this);
-                dialog.setItems(dialogItem, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case 0:
-                                Member member = list.get(position);
-                                database.userDao().delete(member);
-                                onStart();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                });
-                dialog.show();
-            }
-        });
 
+        // Memindahkan database ke list
+        list.clear();
+        list.addAll(database.memberDao().getAll());
+
+        // Menginisialisasi adapter dengan item berupa isi dari list
+        memberAdapter = new MemberAdapter(this, database, list);
         RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(
                 getApplicationContext(), RecyclerView.VERTICAL, false);
 
+        // mengatur adapter dan layout dari recycle view
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(memberAdapter);
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,13 +68,24 @@ public class Main extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (memberAdapter.getItemCount() > 0) {
+                    onStart();
+                } else {
+                    Toast.makeText(Main.this, "Database Null", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
+    // Untuk merefresh database dan tampilan
     @Override
     protected void onStart() {
         super.onStart();
         list.clear();
-        list.addAll(database.userDao().getAll());
+        list.addAll(database.memberDao().getAll());
         memberAdapter.notifyDataSetChanged();
     }
 }

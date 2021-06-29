@@ -1,4 +1,4 @@
-package com.handira.librarify;
+package com.handira.librarify.tool;
 import java.lang.Math;
 
 public class RandomIdGenerator {

@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.handira.librarify.R;
 
 public class Login extends AppCompatActivity {
-    EditText etUsername, etPassword;
-    Button btnLogin, btnHelp;
+    private EditText etUsername, etPassword;
+    private Button btnLogin, btnHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

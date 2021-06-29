@@ -8,11 +8,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.handira.librarify.R;
-import com.handira.librarify.RandomIdGenerator;
+import com.handira.librarify.tool.RandomIdGenerator;
 import com.handira.librarify.database.AppDatabase;
 import com.handira.librarify.database.entity.Member;
 
@@ -21,12 +20,12 @@ public class AddMember extends AppCompatActivity {
     private TextView tvIdInfo;
     private EditText etName, etDob, etAddress;
     private AppDatabase database;
-    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Membuat layar penuh
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -34,14 +33,12 @@ public class AddMember extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_member);
 
-        scrollView =findViewById(R.id.scroll_view);
-
+        // Inisialisai xml
         btnGenerate = findViewById(R.id.btn_generate);
         tvIdInfo = findViewById(R.id.tv_id_info);
         etName = findViewById(R.id.et_name);
         etDob = findViewById(R.id.et_dob);
         etAddress = findViewById(R.id.et_address);
-
         database = AppDatabase.getInstance(getApplicationContext());
 
         btnGenerate.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +58,7 @@ public class AddMember extends AppCompatActivity {
                                 member.name = etName.getText().toString();
                                 member.dob = etDob.getText().toString();
                                 member.address = etAddress.getText().toString();
-                                database.userDao().insertAll(member);
+                                database.memberDao().insertAll(member);
                                 Intent intent = new Intent(AddMember.this, Main.class);
                                 startActivity(intent);
                             }

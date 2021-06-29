@@ -19,10 +19,20 @@
         android:background="@drawable/ic_login_button_rounded"
         android:layout_gravity="center"
         />
+    <Button
+        android:id="@+id/btn_refresh"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Refresh Member"
+        android:textSize="18sp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#8F8F8F"
+        android:background="@drawable/ic_help_button_rounded"
+        android:layout_gravity="center"/>
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
+        android:layout_height="630dp"
         android:layout_marginTop="10dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"

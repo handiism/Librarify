@@ -21,7 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
     @VisibleForTesting
     public static final String DATABASES_NAME = "member-database";
 
-    public abstract MemberDao userDao();
+    public abstract MemberDao memberDao();
 
     private void setDatabaseCreated() {
         mIsDatabaseCreated.postValue(true);
